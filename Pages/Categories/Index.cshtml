@@ -1,5 +1,5 @@
 ﻿@page "{id:int?}"
-@model Ban_Roxana_Lab2.Pages.Publishers.IndexModel
+@model Ban_Roxana_Lab2.Pages.Categories.IndexModel
 
 @{
     ViewData["Title"] = "Index";
@@ -14,22 +14,22 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Publisher[0].PublisherName)
+                @Html.DisplayNameFor(model => model.Category[0].CategoryName)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.PublisherData.Publishers)
+        @foreach (var item in Model.CategoryData.Categories)
  {
  string selectedRow = "";
- if (item.ID == Model.PublisherID)
+            if (item.ID == Model.CategoryID)
  {
  selectedRow = "table-success";
  }
             <tr class="@selectedRow">
                 <td>
-                    @Html.DisplayFor(modelItem => item.PublisherName)
+                    @Html.DisplayFor(modelItem => item.CategoryName)
                 </td>
 
                 <td>
@@ -42,15 +42,15 @@
         }
     </tbody>
 </table>
-@if (Model.PublisherData.Books != null)
+@if (Model.CategoryData.Books != null)
 {
-    <h3>Books Edited by Selected Publisher</h3>
+    <h3>Books Edited by Selected Category</h3>
     <table class="table">
 
-        @foreach (var item in Model.PublisherData.Publishers)
+        @foreach (var item in Model.CategoryData.Categories)
         {
             string selectedRow = "";
-            if (item.ID == Model.PublisherID)
+            if (item.ID == Model.CategoryID)
             {
                 selectedRow = "table-success";
             }
@@ -60,10 +60,9 @@
                     @{
                         foreach (var b in item.Books)
                         {
-                            @if (b != null && b.Author != null)
-                            {
-                                @b.Title @: @b.Author.FullName
-                            }
+
+                            @b.Title @: @b.Author.FullName
+
                             <br />
                         }
                     }

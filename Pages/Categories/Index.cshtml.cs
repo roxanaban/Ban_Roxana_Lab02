@@ -9,7 +9,7 @@ using Ban_Roxana_Lab2.Data;
 using Ban_Roxana_Lab2.Models;
 using Ban_Roxana_Lab2.Models.ViewModels;
 
-namespace Ban_Roxana_Lab2.Pages.Publishers
+namespace Ban_Roxana_Lab2.Pages.Categories
 {
     public class IndexModel : PageModel
     {
@@ -20,25 +20,27 @@ namespace Ban_Roxana_Lab2.Pages.Publishers
             _context = context;
         }
 
-        public IList<Publisher> Publisher { get;set; } = default!;
-        public PublisherIndexData PublisherData { get; set; }
-        public int PublisherID { get; set; }
+        public IList<Category> Category { get;set; } = default!;
+
+        public CategoryIndexData CategoryData { get; set; }
+        public int CategoryID { get; set; }
         public int BookID { get; set; }
         public async Task OnGetAsync(int? id, int? bookID)
         {
-            PublisherData = new PublisherIndexData();
-            PublisherData.Publishers = await _context.Publisher
+            CategoryData = new CategoryIndexData();
+            CategoryData.Categories = await _context.Category
             .Include(i => i.Books)
             .ThenInclude(c => c.Author)
-            .OrderBy(i => i.PublisherName)
+            .OrderBy(i => i.CategoryName)
             .ToListAsync();
             if (id != null)
             {
-                PublisherID = id.Value;
-                Publisher publisher = PublisherData.Publishers
+                CategoryID = id.Value;
+                Category category = CategoryData.Categories
                 .Where(i => i.ID == id.Value).Single();
-                PublisherData.Books = publisher.Books;
+                CategoryData.Books = category.Books;
             }
         }
     }
 }
+
