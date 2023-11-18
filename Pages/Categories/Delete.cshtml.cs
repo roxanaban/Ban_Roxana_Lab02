@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Ban_Roxana_Lab2.Data;
 using Ban_Roxana_Lab2.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Ban_Roxana_Lab2.Pages.Categories
 {
+    [Authorize(Roles = "Admin")]
+
     public class DeleteModel : PageModel
     {
         private readonly Ban_Roxana_Lab2.Data.Ban_Roxana_Lab2Context _context;

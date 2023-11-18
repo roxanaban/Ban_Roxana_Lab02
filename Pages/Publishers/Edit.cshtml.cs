@@ -8,9 +8,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Ban_Roxana_Lab2.Data;
 using Ban_Roxana_Lab2.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Ban_Roxana_Lab2.Pages.Publishers
 {
+    [Authorize(Roles = "Admin")]
+
     public class EditModel : PageModel
     {
         private readonly Ban_Roxana_Lab2.Data.Ban_Roxana_Lab2Context _context;
